@@ -97,6 +97,7 @@ namespace StarterAssets
         private int _animIDJump;
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
+        private int _animIDAttack;
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
         private PlayerInput _playerInput;
@@ -109,6 +110,7 @@ namespace StarterAssets
         private const float _threshold = 0.01f;
 
         private bool _hasAnimator;
+        private bool _inAnimation;
 
         private bool IsCurrentDeviceMouse
         {
@@ -156,9 +158,13 @@ namespace StarterAssets
         {
             _hasAnimator = TryGetComponent(out _animator);
 
-            JumpAndGravity();
+            if (!_inAnimation)
+            {
+                JumpAndGravity();
+                Move();
+                Attack();
+            }
             GroundedCheck();
-            Move();
         }
 
         private void LateUpdate()
@@ -173,6 +179,7 @@ namespace StarterAssets
             _animIDJump = Animator.StringToHash("Jump");
             _animIDFreeFall = Animator.StringToHash("FreeFall");
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+            _animIDAttack = Animator.StringToHash("Attack");
         }
 
         private void GroundedCheck()
@@ -348,6 +355,18 @@ namespace StarterAssets
             }
         }
 
+        private void Attack()
+        {
+            if (_input.attack && Grounded)
+            {
+                if (_hasAnimator)
+                {
+                    _inAnimation = true;
+                    _animator.SetBool(_animIDAttack, true);
+                }
+            }
+        }
+
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
         {
             if (lfAngle < -360f) lfAngle += 360f;
@@ -367,6 +386,17 @@ namespace StarterAssets
             Gizmos.DrawSphere(
                 new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z),
                 GroundedRadius);
+        }
+
+        // This method is called by an Animation Event
+        private void OnAttackEnded()
+        {
+            if (_hasAnimator)
+            {
+                _inAnimation = false;
+                _animator.SetBool(_animIDAttack, false);
+            }
+            _input.attack = false;
         }
 
         private void OnFootstep(AnimationEvent animationEvent)
