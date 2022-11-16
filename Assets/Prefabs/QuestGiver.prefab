@@ -4242,6 +4242,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7486597359109123034}
   - component: {fileID: 679972489002419872}
+  - component: {fileID: 8368801547034581818}
   m_Layer: 0
   m_Name: QuestGiver
   m_TagString: Untagged
@@ -4256,7 +4257,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5890397670660725193}
-  m_LocalRotation: {x: -0.00000006657903, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4278,8 +4279,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5890397670660725193}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 40aaccdb475de0f44a8e96255e846ec1, type: 3}
-  m_Controller: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: be9d56be630442a489c25abbe118216f, type: 3}
+  m_Controller: {fileID: 9100000, guid: a84533b66f91b614180a477452147ae0, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -4289,6 +4290,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!136 &8368801547034581818
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5890397670660725193}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.2
+  m_Height: 1.65
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &5916208632498724204
 GameObject:
   m_ObjectHideFlags: 0

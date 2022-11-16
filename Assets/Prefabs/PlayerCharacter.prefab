@@ -304,7 +304,7 @@ GameObject:
   - component: {fileID: 8716511459447738918}
   - component: {fileID: 2934504767271740586}
   - component: {fileID: 1447673793139636442}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: PlayerCharacter
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -444,6 +444,7 @@ MonoBehaviour:
   look: {x: 0, y: 0}
   jump: 0
   sprint: 0
+  attack: 0
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
