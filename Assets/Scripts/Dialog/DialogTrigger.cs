@@ -3,11 +3,28 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class DialogTrigger : MonoBehaviour
 {
-    private void OnTriggerStay(Collider other)
+    [SerializeField] private RectTransform dialogTip;
+
+    private void Awake()
+    {
+        dialogTip.gameObject.SetActive(false);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        ShowDialogTip(other, true);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        ShowDialogTip(other, false);
+    }
+
+    private void ShowDialogTip(Collider other, bool active)
     {
         if (other.gameObject.layer == Constants.Layers.Player)
         {
-            Debug.Log("Press E to start dialog!");
+            dialogTip.gameObject.SetActive(active);
         }
     }
 }
