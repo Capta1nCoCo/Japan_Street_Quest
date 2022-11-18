@@ -13,6 +13,7 @@ namespace StarterAssets
 		public bool jump;
 		public bool sprint;
 		public bool attack;
+		public bool interact;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -20,6 +21,9 @@ namespace StarterAssets
 		[Header("Mouse Cursor Settings")]
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
+
+		public bool interactionIsPossible;
+		public Transform target;
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 		public void OnMove(InputValue value)
@@ -49,6 +53,11 @@ namespace StarterAssets
         {
 			AttackInput(value.isPressed);
         }
+
+		public void OnInteract(InputValue value)
+        {
+			InteractInput(value.isPressed);
+        }
 #endif
 
 
@@ -75,6 +84,14 @@ namespace StarterAssets
 		public void AttackInput(bool newAttackState)
         {
 			attack = newAttackState;
+        }
+
+		public void InteractInput(bool newInteractState)
+        {
+			if (interactionIsPossible)
+            {
+				interact = newInteractState;
+			}
         }
 
 		private void OnApplicationFocus(bool hasFocus)

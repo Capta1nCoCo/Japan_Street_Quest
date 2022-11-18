@@ -1,11 +1,8 @@
 fileFormatVersion: 2
-guid: be9d56be630442a489c25abbe118216f
+guid: 2d423f79bd388c84f822020ec0979ea2
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
-  - first:
-      74: 7134934329092297148
-    second: Idle
   - first:
       74: -203655887218126122
     second: mixamo.com
@@ -23,11 +20,11 @@ ModelImporter:
     removeConstantScaleCurves: 1
     motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: "Avatar Rig Configuration mis-match. Inbetween bone rotation
-      in configuration does not match rotation in animation file:\n\t'abdomenLower'
-      : rotation error = 2.610429 deg\n\t'lForearmTwist' : rotation error = 21.604952
-      deg\n\t'rForearmTwist' : rotation error = 20.651886 deg\n\t'neckUpper' : rotation
-      error = 1.729959 deg\n"
+    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Inbetween bone
+      rotation in copied configuration does not match rotation in animation file:\n\t'abdomenLower'
+      : rotation error = 2.245433 deg\n\t'lForearmTwist' : rotation error = 45.228725
+      deg\n\t'rForearmTwist' : rotation error = 7.402945 deg\n\t'neckUpper' : rotation
+      error = 1.035447 deg\n"
     animationImportErrors: 
     animationImportWarnings: "\nClip 'mixamo.com' has import animation warnings that
       might lower retargeting quality:\n\t'abdomenLower' is inbetween humanoid transforms
@@ -48,11 +45,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Idle
-      takeName: serahreikkav1
+      name: mixamo.com
+      takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 200
+      lastFrame: 309
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -64,35 +61,6 @@ ModelImporter:
       loopBlendOrientation: 1
       loopBlendPositionY: 1
       loopBlendPositionXZ: 1
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: mixamo.com
-      takeName: mixamo.com
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 997
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
@@ -1568,11 +1536,12 @@ ModelImporter:
     hasTranslationDoF: 1
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: be9d56be630442a489c25abbe118216f,
+    type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 2
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0

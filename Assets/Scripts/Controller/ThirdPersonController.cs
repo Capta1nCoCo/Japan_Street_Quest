@@ -14,6 +14,8 @@ namespace StarterAssets
 #endif
     public class ThirdPersonController : MonoBehaviour
     {
+        [SerializeField] private DialogController dialogController;
+
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 2.0f;
@@ -110,7 +112,7 @@ namespace StarterAssets
         private const float _threshold = 0.01f;
 
         private bool _hasAnimator;
-        private bool _inAnimation;
+        private bool _inAction;
 
         private bool IsCurrentDeviceMouse
         {
@@ -158,11 +160,12 @@ namespace StarterAssets
         {
             _hasAnimator = TryGetComponent(out _animator);
 
-            if (!_inAnimation)
+            if (!_inAction)
             {
                 JumpAndGravity();
                 Move();
                 Attack();
+                Interact();
             }
             GroundedCheck();
         }
@@ -361,10 +364,29 @@ namespace StarterAssets
             {
                 if (_hasAnimator)
                 {
-                    _inAnimation = true;
+                    _inAction = true;
                     _animator.SetBool(_animIDAttack, true);
                 }
             }
+        }
+
+        private void Interact()
+        {
+            if (_input.interact && Grounded)
+            {
+                _inAction = true;
+                InitiateDialog();
+            }
+        }
+
+        private void InitiateDialog()
+        {
+            LockCameraPosition = true;
+            transform.LookAt(_input.target);
+            _cinemachineTargetYaw = 35f;
+            _cinemachineTargetPitch = 12f;
+
+            dialogController?.StartDialog();
         }
 
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
@@ -393,7 +415,7 @@ namespace StarterAssets
         {
             if (_hasAnimator)
             {
-                _inAnimation = false;
+                _inAction = false;
                 _animator.SetBool(_animIDAttack, false);
             }
             _input.attack = false;
