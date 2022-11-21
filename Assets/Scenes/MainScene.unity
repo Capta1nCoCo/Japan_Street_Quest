@@ -1060,8 +1060,9 @@ GameObject:
   - component: {fileID: 1952959625}
   - component: {fileID: 1952959624}
   - component: {fileID: 1952959628}
+  - component: {fileID: 1952959629}
   m_Layer: 5
-  m_Name: DialogCanvas
+  m_Name: DialogueCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1162,8 +1163,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7695a3559c7af1646b3a372ff4c8a391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogTrigger: {fileID: 2013916804}
-  dialogTextWindow: {fileID: 465377391}
+  dialogueTrigger: {fileID: 2013916804}
+--- !u!114 &1952959629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952959623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c833c990a3dbef488d0367ef850a9c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueWindow: {fileID: 465377391}
+  textScripts:
+  - {fileID: 11400000, guid: b26dd9bc9d8248f4ea45d34bf9bcbd87, type: 2}
 --- !u!4 &1963713872 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7486597359109123034, guid: 9ad1bfc242df0b748b4c53d4194c135a,
@@ -1250,7 +1265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 841eeb2a8d0c82a488a14e044cfc2dbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogTip: {fileID: 706296347}
+  dialogueTip: {fileID: 706296347}
   questGiver: {fileID: 1963713872}
 --- !u!65 &2013916805
 BoxCollider:

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8ea871729920ef429c89dd0d148e3a3, type: 3}
+  m_Name: InitialDialog
+  m_EditorClassIdentifier: 
+  lines:
+  - Hello duderino!
+  - We've got robbed by the Gachi Brotherhood.
+  - There were 3 of them when we've got attacked.
+  - Go kick some ass and get our clothes back!

@@ -14,7 +14,7 @@ namespace StarterAssets
 #endif
     public class ThirdPersonController : MonoBehaviour
     {
-        [SerializeField] private DialogController dialogController;
+        [SerializeField] private DialogueController dialogController;
 
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
@@ -80,6 +80,8 @@ namespace StarterAssets
         // cinemachine
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
+        private float _cacheTargetYaw;
+        private float _cacheTargetPitch;
 
         // player
         private float _speed;
@@ -134,6 +136,8 @@ namespace StarterAssets
             {
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             }
+
+            GameEvents.FinishDialog += FinishDialog;
         }
 
         private void Start()
@@ -173,6 +177,11 @@ namespace StarterAssets
         private void LateUpdate()
         {
             CameraRotation();
+        }
+
+        private void OnDestroy()
+        {
+            GameEvents.FinishDialog -= FinishDialog;
         }
 
         private void AssignAnimationIDs()
@@ -375,18 +384,29 @@ namespace StarterAssets
             if (_input.interact && Grounded)
             {
                 _inAction = true;
-                InitiateDialog();
+                InitiateDialogue();
             }
         }
 
-        private void InitiateDialog()
+        private void InitiateDialogue()
         {
             LockCameraPosition = true;
             transform.LookAt(_input.target);
+            _cacheTargetYaw = _cinemachineTargetYaw;
+            _cacheTargetPitch = _cinemachineTargetPitch;
             _cinemachineTargetYaw = 35f;
             _cinemachineTargetPitch = 12f;
 
             dialogController?.StartDialog();
+        }
+
+        private void FinishDialog()
+        {
+            _input.interact = false;
+            LockCameraPosition = false;
+            _cinemachineTargetYaw = _cacheTargetYaw;
+            _cinemachineTargetPitch = _cacheTargetPitch;
+            _inAction = false;
         }
 
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)

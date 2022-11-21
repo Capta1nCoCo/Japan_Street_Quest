@@ -1,48 +1,40 @@
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
-public class DialogTrigger : MonoBehaviour
+public class DialogueTrigger : MonoBehaviour
 {
-    [SerializeField] private RectTransform dialogTip;
+    [SerializeField] private RectTransform dialogueTip;
     [SerializeField] private Transform questGiver;
 
     private StarterAssets.StarterAssetsInputs assetsInputs;
 
     private void Awake()
     {
-        dialogTip.gameObject.SetActive(false);
+        assetsInputs = FindObjectOfType<StarterAssets.StarterAssetsInputs>();
+        dialogueTip.gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        EnableDialogInteraction(other, true);
+        EnableDialogueInteraction(other, true);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        EnableDialogInteraction(other, false);
+        EnableDialogueInteraction(other, false);
     }
 
-    private void EnableDialogInteraction(Collider other, bool active)
+    private void EnableDialogueInteraction(Collider other, bool active)
     {
         if (other.gameObject.layer == Constants.Layers.Player)
         {
-            CachePlayerInputs(other);
-            ShowDialogTip(active);
+            ShowDialogueTip(active);
         }
     }
 
-    private void CachePlayerInputs(Collider other)
+    public void ShowDialogueTip(bool active)
     {
-        if (assetsInputs == null)
-        {
-            assetsInputs = other.GetComponent<StarterAssets.StarterAssetsInputs>();
-        }
-    }
-
-    public void ShowDialogTip(bool active)
-    {
-        dialogTip.gameObject.SetActive(active);
+        dialogueTip.gameObject.SetActive(active);
         SetInteractionTarget(active);
     }
 
