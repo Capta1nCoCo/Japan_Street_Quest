@@ -7,13 +7,23 @@ public class EnemyZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        ProvokeEnemy(other);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        SuppressEnemy(other);
+    }
+
+    private void ProvokeEnemy(Collider other)
+    {
         if (other.gameObject.layer == Constants.Layers.Player)
         {
             enemy.MoveTowardsPlayer();
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void SuppressEnemy(Collider other)
     {
         if (other.gameObject.layer == Constants.Layers.Player)
         {

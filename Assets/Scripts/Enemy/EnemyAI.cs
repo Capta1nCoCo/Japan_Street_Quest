@@ -2,24 +2,22 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(EnemyAnimation))]
 public class EnemyAI : MonoBehaviour
 {
-    private const string _isAttacking = "isAttacking";
-    private const string _isWalking = "isWalking";
-
     private Vector3 startingPoint;
 
     private bool isEngaging;
 
     private StarterAssets.ThirdPersonController player;
     private NavMeshAgent navMeshAgent;
-    private Animator animator;
+    private EnemyAnimation enemyAnimation;
 
     private void Awake()
     {
         player = FindObjectOfType<StarterAssets.ThirdPersonController>();
         navMeshAgent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
+        enemyAnimation = GetComponent<EnemyAnimation>();
 
         startingPoint = transform.position;
     }
@@ -37,9 +35,9 @@ public class EnemyAI : MonoBehaviour
     public void MoveToStartingPoint()
     {
         isEngaging = false;
-        navMeshAgent.SetDestination(startingPoint);
-        animator.SetBool(_isAttacking, false);
-        animator.SetBool(_isWalking, false);
+        navMeshAgent?.SetDestination(startingPoint);
+        enemyAnimation.Attack(false);
+        enemyAnimation.Walk(false);
     }
 
     private void EngagePlayer()
@@ -61,13 +59,13 @@ public class EnemyAI : MonoBehaviour
     private void AttackPlayer()
     {
         transform.LookAt(player.transform.position);
-        animator.SetBool(_isAttacking, true);
+        enemyAnimation.Attack(true);
     }
 
     private void ChasePlayer()
     {
         navMeshAgent.SetDestination(player.transform.position);
-        animator.SetBool(_isWalking, true);
+        enemyAnimation.Walk(true);
     }
 
     // Methods below are used by Animation Envents
@@ -78,7 +76,12 @@ public class EnemyAI : MonoBehaviour
 
     private void ResumeMovement()
     {
-        animator.SetBool(_isAttacking, false);
+        enemyAnimation.Attack(false);
         navMeshAgent.isStopped = false;
+    }
+
+    private void StopAllActions()
+    {
+        isEngaging = false;
     }
 }
