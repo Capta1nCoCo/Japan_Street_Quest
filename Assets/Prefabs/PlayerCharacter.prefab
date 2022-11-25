@@ -705,7 +705,7 @@ GameObject:
   - component: {fileID: 3376311345983287111}
   - component: {fileID: 511170776823255344}
   - component: {fileID: 737243290936180362}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: HitCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -742,7 +742,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1876059328623861357}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

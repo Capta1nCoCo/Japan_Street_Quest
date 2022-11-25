@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System;
 
 public class QuestProgress : MonoBehaviour
 {
@@ -11,11 +12,23 @@ public class QuestProgress : MonoBehaviour
     private int requiredItems;
     private int currentItems;
 
+    private void Awake()
+    {
+        GameEvents.UpdateQuestProgress += OnUpdateQuestProgress;
+        GameEvents.QuestCompleted += OnQuestCompleted;
+    }
+
     private void OnEnable()
     {
         GetQuestData();
         UpdateQuestName();
         UpdateCounter();
+    }
+
+    private void OnDestroy()
+    {
+        GameEvents.UpdateQuestProgress -= OnUpdateQuestProgress;
+        GameEvents.QuestCompleted -= OnQuestCompleted;
     }
 
     private void GetQuestData()
@@ -33,5 +46,20 @@ public class QuestProgress : MonoBehaviour
     private void UpdateCounter()
     {
         progressConuter.text = currentItems + "/" + requiredItems;
+        if (currentItems >= requiredItems)
+        {
+            GameEvents.QuestObjectiveCompleted();
+        }
+    }
+
+    private void OnUpdateQuestProgress()
+    {
+        currentItems++;
+        UpdateCounter();
+    }
+
+    private void OnQuestCompleted()
+    {
+        gameObject.SetActive(false);
     }
 }

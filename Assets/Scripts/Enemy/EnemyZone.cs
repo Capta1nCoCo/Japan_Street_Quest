@@ -12,7 +12,10 @@ public class EnemyZone : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        SuppressEnemy(other);
+        if (enemy.gameObject.activeSelf)
+        {
+            SuppressEnemy(other);
+        }
     }
 
     private void ProvokeEnemy(Collider other)

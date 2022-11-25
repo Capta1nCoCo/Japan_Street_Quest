@@ -6,24 +6,28 @@ public class QuestTitle : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI titleText;
     [SerializeField] private QuestProgress questInProgress;
+    [SerializeField] private GameObject questItems;
 
+    private int questIndex = 0;
     private float delayInSeconds = 2f;
 
     private void Awake()
     {
         titleText.gameObject.SetActive(false);
+        questInProgress.gameObject.SetActive(false);
+        questItems.SetActive(false);
 
-        GameEvents.FinishDialog += OnFinishDialog;
+        GameEvents.QuestAccepted += OnQuestAccepted;
     }
 
     private void OnDestroy()
     {
-        GameEvents.FinishDialog -= OnFinishDialog;
+        GameEvents.QuestAccepted -= OnQuestAccepted;
     }
 
-    private void OnFinishDialog()
+    private void OnQuestAccepted()
     {
-        titleText.text = QuestStorage.Instance.getQuestDataStorage[0].getQuestName;
+        titleText.text = QuestStorage.Instance.getQuestDataStorage[questIndex].getQuestName;
         StartCoroutine(ShowQuestTitle());
     }
 
@@ -33,5 +37,6 @@ public class QuestTitle : MonoBehaviour
         yield return new WaitForSeconds(delayInSeconds);
         titleText.gameObject.SetActive(false);
         questInProgress.gameObject.SetActive(true);
+        questItems.SetActive(true);
     }
 }

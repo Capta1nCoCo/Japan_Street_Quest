@@ -20,13 +20,16 @@ public class EnemyHealth : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (isAlive && other.gameObject.layer == Constants.Layers.Player)
+        if (isAlive && other.gameObject.layer == Constants.Layers.PlayersHitCollider)
         {
-            Debug.Log("Enemy got hit!");
             currentHitPoints--;
             if (currentHitPoints <= 0)
             {
                 Die();
+            }
+            else
+            {
+                enemyAnimation.HitReaction();
             }
         }
     }
@@ -40,6 +43,7 @@ public class EnemyHealth : MonoBehaviour
     // Method below is used by Animation Event
     private void DisableGameObject()
     {
+        GameEvents.UpdateQuestProgress();
         gameObject.SetActive(false);
     }
 }

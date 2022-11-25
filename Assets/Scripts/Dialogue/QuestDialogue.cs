@@ -9,17 +9,42 @@ public class QuestDialogue : MonoBehaviour
 
     private string[] questDialog;
 
+    private int questIndex = 0;
     private float delayInSeconds = 3f;
+
+    private bool initialDialog;
+    private bool questObjectiveCompleted;
 
     private void Awake()
     {
         dialogueWindow.gameObject.SetActive(false);
+        initialDialog = true;
+
+        GameEvents.QuestObjectiveCompleted += OnQuestObjectiveCompleted;
+    }
+
+    private void OnDestroy()
+    {
+        GameEvents.QuestObjectiveCompleted -= OnQuestObjectiveCompleted;
     }
 
     public void RunDialogue()
     {
-        questDialog = textScripts[0].getLines;
-        StartCoroutine(ShowDialogueLinesWithDelay());
+        questDialog = textScripts[questIndex].getLines;
+        if (initialDialog)
+        {
+            initialDialog = false;
+            StartCoroutine(ShowDialogueLinesWithDelay());
+        }
+        else if (questObjectiveCompleted)
+        {
+            StartCoroutine(ShowLineWithDelay(textScripts[questIndex].getQuestRewardLine));
+            GameEvents.QuestCompleted();
+        }
+        else
+        {
+            StartCoroutine(ShowLineWithDelay(questDialog[questDialog.Length - 1]));
+        }
     }
 
     private IEnumerator ShowDialogueLinesWithDelay()
@@ -32,5 +57,20 @@ public class QuestDialogue : MonoBehaviour
         }
         dialogueWindow.gameObject.SetActive(false);
         GameEvents.FinishDialog();
+        GameEvents.QuestAccepted();
+    }
+
+    private IEnumerator ShowLineWithDelay(string line)
+    {
+        dialogueWindow.gameObject.SetActive(true);
+        dialogueWindow.text = line;
+        yield return new WaitForSeconds(delayInSeconds);
+        dialogueWindow.gameObject.SetActive(false);
+        GameEvents.FinishDialog();
+    }
+
+    private void OnQuestObjectiveCompleted()
+    {
+        questObjectiveCompleted = true;
     }
 }

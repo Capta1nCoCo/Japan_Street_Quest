@@ -35,7 +35,7 @@ public class EnemyAI : MonoBehaviour
     public void MoveToStartingPoint()
     {
         isEngaging = false;
-        navMeshAgent?.SetDestination(startingPoint);
+        navMeshAgent.SetDestination(startingPoint);
         enemyAnimation.Attack(false);
         enemyAnimation.Walk(false);
     }

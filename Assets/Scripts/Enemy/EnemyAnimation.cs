@@ -6,6 +6,7 @@ public class EnemyAnimation : MonoBehaviour
     private const string _isAttacking = "isAttacking";
     private const string _isWalking = "isWalking";
     private const string _Death = "Death";
+    private const string _HitReaction = "HitReaction";
 
     private Animator animator;
 
@@ -22,6 +23,11 @@ public class EnemyAnimation : MonoBehaviour
     public void Attack(bool isActive)
     {
         animator.SetBool(_isAttacking, isActive);
+    }
+
+    public void HitReaction()
+    {
+        animator.SetTrigger(_HitReaction);
     }
 
     public void Death()
